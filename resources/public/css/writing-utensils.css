@@ -1,0 +1,52 @@
+#note {
+    height: 80%;
+    width: 80%;
+    padding: 10px;
+    left: calc(10% + 10px);
+    top: 10%;
+    position: fixed;
+    background-color: #dedede;
+    border-radius: 10px;
+    border: 2px solid #555555;
+    z-index: 3;
+}
+
+#note > * {
+    width: 100%;
+    font-size: 24px;
+}
+
+#note > *:not(:first-child) {
+    margin-top: 5px;
+}
+
+#note input[type="text"] {
+    height: 30px;
+}
+
+#note textarea {
+    height: 70%;
+}
+
+#note .row *{
+    display: inline-block;
+}
+
+#note .row #structure {
+    width: 80%;
+}
+
+#note .row #structure .body{
+    width: 60%;
+    height: 30px;
+    border-bottom: 2px dashed #555555;
+}
+
+#note .row #structure .submit{
+    width: 8%;
+}
+
+#note .row .submit {
+    width: 8%;
+    height: 30px;
+}
