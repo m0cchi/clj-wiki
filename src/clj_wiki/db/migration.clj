@@ -129,7 +129,7 @@
                {:id 3
                 :name "top"
                 :read 3
-                :parent 1 ;; 1 is root directory
+                :parent 2 ;; 1 is root directory
                 :owner 1})
   ;; create top page article
   (sql/insert! db-spec :t_article
