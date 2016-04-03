@@ -15,11 +15,13 @@
   [{css :css,
     js :js,
     side-menu-list :side-menu-list,
+    content :content,
     headers :headers}]
   [:header :nav :ul] (fair-vector headers
                                   #(hiccup/html [:li [:a {:href (:ancher %)} (:text %)]]))
   [:#side-menu-list] (fair-vector side-menu-list
                                   #(hiccup/html [:li [:a {:href (:ancher %)} (:text %)]]))
+  [:#content] (html/content (html/html-snippet content))
   [:head] (fair-vector css
                        #(hiccup/html [:link {:rel "stylesheet" :href %}]))
   [:head] (fair-vector js
