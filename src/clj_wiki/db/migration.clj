@@ -49,27 +49,33 @@
                               [:user_id "integer not null"]
                               ["foreign key(group_id) references m_group(id)"]
                               ["foreign key(user_id) references m_user(id)"])
-                    :t_directorys_group (sql/create-table-ddl 
-                                         :t_directorys_group
+                    :t_directories_group (sql/create-table-ddl 
+                                          :t_directories_group
+                                          [:directory_id "integer not null"]
+                                          [:group_id "intger not null"]
+                                          ["foreign key(directory_id) references m_directory(id)"]
+                                          ["foreign key(group_id) references m_group(id)"])
+                    :t_directories_user (sql/create-table-ddl 
+                                         :t_directories_user
                                          [:directory_id "integer not null"]
-                                         [:group_id "intger not null"]
+                                         [:user_id "intger not null"]
                                          ["foreign key(directory_id) references m_directory(id)"]
-                                         ["foreign key(group_id) references m_group(id)"])
-                    :t_directorys_user (sql/create-table-ddl 
-                                        :t_directorys_user
-                                        [:directory_id "integer not null"]
-                                        [:user_id "intger not null"]
-                                        ["foreign key(directory_id) references m_directory(id)"]
-                                        ["foreign key(user_id) references m_user(id)"])
+                                         ["foreign key(user_id) references m_user(id)"])
+                    :m_article (sql/create-table-ddl
+                                :m_article
+                                [:id "integer primary key autoincrement"]
+                                [:directory_id "integer not null"]
+                                [:createdate "timestamp default CURRENT_TIMESTAMP"]
+                                [:lastupdate "timestamp default CURRENT_TIMESTAMP"]
+                                ["foreign key(directory_id) references m_directory(id)"])                                
                     :t_article (sql/create-table-ddl
                                 :t_article
                                 [:id "integer primary key autoincrement"]
-                                [:directory_id "integer not null"]
+                                [:article_id "integer"]
                                 [:title "text not null"]
                                 [:body "text not null"]
                                 [:createdate "timestamp default CURRENT_TIMESTAMP"]
-                                [:lastupdate "timestamp default CURRENT_TIMESTAMP"]
-                                ["foreign key(directory_id) references m_directory(id)"])
+                                ["foreign key(article_id) references m_article(id)"])
                     :t_tag (sql/create-table-ddl
                             :t_tag
                             [:tag_id "integer"]
@@ -132,8 +138,13 @@
                 :parent 2 ;; 1 is root directory
                 :owner 1})
   ;; create top page article
+  (sql/insert! db-spec :m_article
+               {:id 1
+                :directory_id 3 ;; /special/top
+                })
+  ;; create top page article
   (sql/insert! db-spec :t_article
-               {:directory_id 3 ;; /special/top
+               {:article_id 1
                 :title "Wellcome"
                 :body "BABYMETAL good!"}))
 
