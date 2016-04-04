@@ -17,7 +17,9 @@
         // subview
         var subViews = document.querySelectorAll('.browser-action');
         for(var i = 0; 0 < subViews.length; i++){
-            subView[subViews[i].getAttribute('id')] = subViews[i];
+            var id = subViews[i].id;
+            console.log(id);
+            subView[id] = subViews[i];
         }
     }
 
@@ -48,14 +50,15 @@
         
     }
 
-    function openNoteViewer() {
+    borwserActions['#write'] = function() {
         var note = subView['note'];
         note.style.display = 'block';
+        var closeButton = document.querySelector('#note .closeable');
+        closeButton.onclick = (function () {
+            note.style.display = 'none';            
+        });
+        var titleEditingArea = document.querySelector('#note input[placeholder="title"]');
         titleEditingArea.focus();
-    }
-
-    borwserActions['#write'] = function() {
-        openNoteViewer();
     };
 
     borwserActions['#logout'] = function() {
