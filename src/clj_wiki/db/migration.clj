@@ -63,11 +63,10 @@
                                          ["foreign key(user_id) references m_user(id)"])
                     :m_article (sql/create-table-ddl
                                 :m_article
-                                [:id "integer primary key autoincrement"]
-                                [:directory_id "integer not null"]
+                                [:id "integer"]
                                 [:createdate "timestamp default CURRENT_TIMESTAMP"]
                                 [:lastupdate "timestamp default CURRENT_TIMESTAMP"]
-                                ["foreign key(directory_id) references m_directory(id)"])                                
+                                ["foreign key(id) references m_directory(id)"])
                     :t_article (sql/create-table-ddl
                                 :t_article
                                 [:id "integer primary key autoincrement"]
@@ -139,12 +138,11 @@
                 :owner 1})
   ;; create top page article
   (sql/insert! db-spec :m_article
-               {:id 1
-                :directory_id 3 ;; /special/top
+               {:id 3 ;; /special/top
                 })
   ;; create top page article
   (sql/insert! db-spec :t_article
-               {:article_id 1
+               {:article_id 3
                 :title "Wellcome"
                 :body "BABYMETAL good!"}))
 

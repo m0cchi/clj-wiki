@@ -9,10 +9,6 @@
 ;; / special / top 
 (def root-id 1)
 
-(defn pass [m o]
-  (println m ":" o)
-  o)
-
 (defn search-directory
   ([path]
    (let [parts (split path #"/")]
@@ -27,7 +23,6 @@
        directory))))
 
 (defn article-to-html [article]
-  (println "reached article")
   (hiccup/html [:div
                 [:div (:title article)]
                 [:div (:body article)]]))
